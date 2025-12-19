@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
     };
 
     const cartTotal = cartItems.reduce(
-        (total, item) => total + (item.price || 100) * item.quantity, // Default price 100 if missing
+        (total, item) => total + (item.price || 500) * item.quantity, // Default price 500 if missing
         0
     );
 

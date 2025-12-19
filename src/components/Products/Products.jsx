@@ -113,7 +113,7 @@ const Products = () => {
                       <span className="text-sm font-medium">{data.rating}</span>
                     </div>
                   </div>
-                  <p className="font-bold text-lg mt-1 text-slate-900 dark:text-white">${data.price}</p>
+                  <p className="font-bold text-lg mt-1 text-slate-900 dark:text-white">₹{data.price}</p>
                 </div>
               </div>
             ))}

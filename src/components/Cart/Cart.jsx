@@ -43,7 +43,7 @@ const Cart = () => {
                                     <h3 className="font-bold text-lg">{item.title}</h3>
                                     <p className="text-sm text-gray-400">{item.description}</p>
                                     <p className="text-primary font-bold mt-1">
-                                        ${item.price || 100} x {item.quantity}
+                                        ₹{item.price || 500} x {item.quantity}
                                     </p>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@ const Cart = () => {
                     <h2 className="text-xl font-bold mb-4">Order Summary</h2>
                     <div className="flex justify-between mb-2">
                         <span>Subtotal</span>
-                        <span>${cartTotal}</span>
+                        <span>₹{cartTotal}</span>
                     </div>
                     <div className="flex justify-between mb-4 pb-4 border-b border-gray-200 dark:border-gray-600">
                         <span>Shipping</span>
@@ -71,7 +71,7 @@ const Cart = () => {
                     </div>
                     <div className="flex justify-between text-xl font-bold mb-6">
                         <span>Total</span>
-                        <span>${cartTotal}</span>
+                        <span>₹{cartTotal}</span>
                     </div>
 
                     <Link

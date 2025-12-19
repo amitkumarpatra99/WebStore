@@ -79,7 +79,7 @@ const TopProducts = ({ handleOrderPopup }) => {
                 <p className="text-gray-500 group-hover:text-gray-200 duration-300 text-sm line-clamp-2 px-2">
                   {data.description}
                 </p>
-                <div className="mt-2 font-bold text-xl group-hover:text-white duration-300">${data.price}</div>
+                <div className="mt-2 font-bold text-xl group-hover:text-white duration-300">₹{data.price}</div>
 
                 <button
                   className="bg-primary group-hover:bg-white group-hover:text-primary text-white py-2 px-6 rounded-full mt-4 hover:scale-105 duration-300 font-semibold shadow-md"
