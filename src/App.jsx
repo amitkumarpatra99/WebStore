@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CategoryPage from "./pages/CategoryPage";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Products from "./components/Products/Products";
@@ -57,6 +58,9 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Layout handleOrderPopup={handleOrderPopup} />}>
                 <Route index element={<Home handleOrderPopup={handleOrderPopup} />} />
+                <Route path="mobiles" element={<CategoryPage category="mobiles" />} />
+                <Route path="electronics" element={<CategoryPage category="electronics" />} />
+                <Route path="fashion" element={<CategoryPage category="fashion" />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="checkout" element={<Order />} />
                 <Route path="orders" element={<Orders />} />
