@@ -16,3 +16,4 @@ A modern, responsive e-commerce frontend built with React, Vite, and Tailwind CS
 - Tailwind CSS
 - React Slick (Carousel)
 - AOS (Animations)
+- GSAP 
