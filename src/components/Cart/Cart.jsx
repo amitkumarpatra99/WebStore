@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 
 const Cart = () => {
-    const { cartItems, removeFromCart, cartTotal } = useCart();
+    const { cartItems, removeFromCart, cartTotal, addToCart, decrementCartItem } = useCart();
 
     if (cartItems.length === 0) {
         return (
@@ -42,8 +42,23 @@ const Cart = () => {
                                 <div>
                                     <h3 className="font-bold text-lg">{item.title}</h3>
                                     <p className="text-sm text-gray-400">{item.description}</p>
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <button
+                                            className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm font-bold"
+                                            onClick={() => decrementCartItem(item.id)}
+                                        >
+                                            -
+                                        </button>
+                                        <span className="font-bold">{item.quantity}</span>
+                                        <button
+                                            className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-sm font-bold"
+                                            onClick={() => addToCart(item)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                     <p className="text-primary font-bold mt-1">
-                                        ₹{item.price || 500} x {item.quantity}
+                                        ₹{item.price || 500} x {item.quantity} = ₹{(item.price || 500) * item.quantity}
                                     </p>
                                 </div>
                             </div>

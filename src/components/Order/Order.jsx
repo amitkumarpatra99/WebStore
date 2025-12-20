@@ -1,45 +1,65 @@
 import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
-import { Link } from "react-router-dom";
+import { useOrder } from "../../context/OrderContext";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Order = () => {
-    const { cartItems, cartTotal } = useCart();
-    const [paymentMethod, setPaymentMethod] = useState("razorpay");
-    const [orderPlaced, setOrderPlaced] = useState(false);
+    const { cartItems, cartTotal, clearCart } = useCart();
+    const { placeOrder } = useOrder();
+    const navigate = useNavigate();
 
-    const handlePayment = () => {
+    const [paymentMethod, setPaymentMethod] = useState("cod");
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        address: "",
+        city: "",
+        zip: "",
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handlePlaceOrder = () => {
+        // Basic Validation
+        if (!formData.fullName || !formData.email || !formData.address || !formData.city || !formData.zip) {
+            toast.error("Please fill in all shipping details.");
+            return;
+        }
+
+        const orderData = {
+            items: cartItems,
+            total: cartTotal,
+            shipping: formData,
+            paymentMethod,
+        };
+
         if (paymentMethod === "razorpay") {
-            // Redirect to Razorpay link
-            window.location.href = "https://rzp.io/rzp/amitpatra";
+            // Mock Razorpay flow
+            // Ideally we'd open Razorpay here, and on success call placeOrder
+            // For now, let's assume payment succeeds for demo
+            toast.loading("Processing Payment...");
+            setTimeout(() => {
+                toast.dismiss();
+                placeOrder(orderData);
+                clearCart();
+                navigate("/orders");
+            }, 2000);
         } else {
-            // Handle COD logic
-            setOrderPlaced(true);
+            // COD
+            placeOrder(orderData);
+            clearCart();
+            navigate("/orders");
         }
     };
 
-    if (cartItems.length === 0 && !orderPlaced) {
+    if (cartItems.length === 0) {
         return (
             <div className="h-[50vh] flex flex-col items-center justify-center text-center dark:text-white">
                 <h2 className="text-2xl font-bold mb-4">No items to checkout</h2>
                 <Link to="/" className="text-primary hover:underline">Return to Home</Link>
-            </div>
-        )
-    }
-
-    if (orderPlaced) {
-        return (
-            <div className="h-[60vh] flex flex-col items-center justify-center text-center dark:text-white px-4">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                    <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                </div>
-                <h2 className="text-3xl font-bold mb-2">Order Placed Successfully!</h2>
-                <p className="text-gray-500 mb-8 max-w-md">Thank you for your order. You will receive a confirmation email shortly. Your order will be delivered soon.</p>
-                <Link
-                    to="/"
-                    className="bg-primary text-white py-3 px-8 rounded-full font-bold shadow-lg hover:scale-105 transition-all duration-300"
-                >
-                    Continue Shopping
-                </Link>
             </div>
         )
     }
@@ -49,17 +69,52 @@ const Order = () => {
             <h1 className="text-3xl font-bold mb-10 text-center">Checkout</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                {/* Shipping Form (Visual Only for now) */}
+                {/* Shipping Form */}
                 <div className="space-y-6">
                     <div>
                         <h2 className="text-xl font-bold mb-4">Shipping Details</h2>
                         <div className="grid grid-cols-1 gap-4">
-                            <input type="text" placeholder="Full Name" className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none" />
-                            <input type="email" placeholder="Email Address" className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none" />
-                            <input type="text" placeholder="Address" className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none" />
+                            <input
+                                type="text"
+                                name="fullName"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                placeholder="Full Name"
+                                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none"
+                            />
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Email Address"
+                                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none"
+                            />
+                            <input
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                                placeholder="Address"
+                                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none"
+                            />
                             <div className="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="City" className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none" />
-                                <input type="text" placeholder="Zip Code" className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none" />
+                                <input
+                                    type="text"
+                                    name="city"
+                                    value={formData.city}
+                                    onChange={handleChange}
+                                    placeholder="City"
+                                    className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none"
+                                />
+                                <input
+                                    type="text"
+                                    name="zip"
+                                    value={formData.zip}
+                                    onChange={handleChange}
+                                    placeholder="Zip Code"
+                                    className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-slate-800 focus:ring-2 focus:ring-primary outline-none"
+                                />
                             </div>
                         </div>
                     </div>
@@ -112,7 +167,7 @@ const Order = () => {
                     </div>
 
                     <button
-                        onClick={handlePayment}
+                        onClick={handlePlaceOrder}
                         className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                     >
                         {paymentMethod === 'razorpay' ? "Pay Now" : "Place Order"}

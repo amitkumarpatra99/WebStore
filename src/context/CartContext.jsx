@@ -24,6 +24,20 @@ export const CartProvider = ({ children }) => {
         });
     };
 
+    const decrementCartItem = (id) => {
+        setCartItems((prevItems) => {
+            const existingItem = prevItems.find((item) => item.id === id);
+            if (existingItem && existingItem.quantity > 1) {
+                return prevItems.map((item) =>
+                    item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+                );
+            }
+            // Optional: Remove if quantity becomes 0?
+            // For now, let's just keep it at 1 or use removeFromCart explicitly
+            return prevItems;
+        });
+    };
+
     const removeFromCart = (id) => {
         setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
     };
@@ -39,7 +53,7 @@ export const CartProvider = ({ children }) => {
 
     return (
         <CartContext.Provider
-            value={{ cartItems, addToCart, removeFromCart, clearCart, cartTotal }}
+            value={{ cartItems, addToCart, removeFromCart, clearCart, cartTotal, decrementCartItem }}
         >
             {children}
         </CartContext.Provider>

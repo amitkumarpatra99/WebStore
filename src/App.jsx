@@ -15,6 +15,9 @@ import { CartProvider } from "./context/CartContext";
 import Layout from "./Layout";
 import Cart from "./components/Cart/Cart";
 import Order from "./components/Order/Order";
+import Orders from "./components/Orders/Orders";
+import { OrderProvider } from "./context/OrderContext";
+import { Toaster } from "react-hot-toast";
 
 // Landing Page Component
 const Home = ({ handleOrderPopup }) => (
@@ -48,17 +51,21 @@ const App = () => {
 
   return (
     <CartProvider>
-      <BrowserRouter>
-        <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
-          <Routes>
-            <Route path="/" element={<Layout handleOrderPopup={handleOrderPopup} />}>
-              <Route index element={<Home handleOrderPopup={handleOrderPopup} />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="checkout" element={<Order />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <OrderProvider>
+        <BrowserRouter>
+          <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
+            <Routes>
+              <Route path="/" element={<Layout handleOrderPopup={handleOrderPopup} />}>
+                <Route index element={<Home handleOrderPopup={handleOrderPopup} />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="checkout" element={<Order />} />
+                <Route path="orders" element={<Orders />} />
+              </Route>
+            </Routes>
+          </div>
+          <Toaster position="bottom-center" />
+        </BrowserRouter>
+      </OrderProvider>
     </CartProvider>
   );
 };

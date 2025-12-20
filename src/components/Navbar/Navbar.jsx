@@ -11,6 +11,7 @@ const Menu = [
   { id: 2, name: "Mobiles", link: "/#mobiles" },
   { id: 3, name: "Electronics", link: "/#electronics" },
   { id: 4, name: "Fashion", link: "/#fashion" },
+  { id: 5, name: "Orders", link: "/orders" },
 ];
 
 const DropdownLinks = [
