@@ -30,9 +30,14 @@ const Navbar = ({ handleOrderPopup }) => {
         <div>
           <Link to="/" className="font-bold text-2xl sm:text-3xl flex gap-2 items-center tracking-wide">
             <div className="w-10 h-10 bg-gradient-to-tr from-primary to-secondary rounded-xl flex items-center justify-center text-white font-extrabold shadow-lg shadow-primary/30">W</div>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-              WebStore
-            </span>
+            <div className="flex flex-col justify-center">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary leading-none">
+                WebStore
+              </span>
+              <span className="text-[10px] sm:text-xs font-medium text-gray-400 tracking-[0.2em] -mt-0.5 uppercase pl-0.5">
+                BY MR PATRA
+              </span>
+            </div>
           </Link>
         </div>
 
