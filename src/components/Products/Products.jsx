@@ -1,58 +1,10 @@
 import React from "react";
-import Img1 from "../../assets/women/women.png";
-import Img2 from "../../assets/women/women2.jpg";
-import Img3 from "../../assets/women/women3.jpg";
-import Img4 from "../../assets/women/women4.jpg";
-import { FaStar, FaCartPlus } from "react-icons/fa"; // Added FaCartPlus
+import { FaStar, FaCartPlus } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
+import { getAllProducts } from "../../data/products";
 
-const ProductsData = [
-  {
-    id: 1,
-    img: Img1,
-    title: "Women Ethnic",
-    rating: 5.0,
-    color: "White",
-    aosDelay: "0",
-    price: 150,
-  },
-  {
-    id: 2,
-    img: Img2,
-    title: "Women Western",
-    rating: 4.5,
-    color: "Red",
-    aosDelay: "200",
-    price: 120,
-  },
-  {
-    id: 3,
-    img: Img3,
-    title: "Goggles",
-    rating: 4.7,
-    color: "Brown",
-    aosDelay: "400",
-    price: 60,
-  },
-  {
-    id: 4,
-    img: Img4,
-    title: "Printed T-Shirt",
-    rating: 4.4,
-    color: "Yellow",
-    aosDelay: "600",
-    price: 45,
-  },
-  {
-    id: 5,
-    img: Img2,
-    title: "Fashion T-Shirt",
-    rating: 4.5,
-    color: "Pink",
-    aosDelay: "800",
-    price: 55,
-  },
-];
+const ProductsData = getAllProducts().filter((item) => item.id <= 5);
 
 const Products = () => {
   const { addToCart } = useCart();
@@ -78,7 +30,8 @@ const Products = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-8">
             {/* Card section */}
             {ProductsData.map((data) => (
-              <div
+              <Link
+                to={`/product/${data.id}`}
                 data-aos="fade-up"
                 data-aos-delay={data.aosDelay}
                 key={data.id}
@@ -93,7 +46,7 @@ const Products = () => {
                   {/* Overlay with Add to Cart */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
                     <button
-                      onClick={(e) => { e.stopPropagation(); addToCart(data); }}
+                      onClick={(e) => { e.preventDefault(); addToCart(data); }}
                       className="bg-primary text-white p-3 rounded-full hover:scale-110 transition-transform shadow-lg"
                       title="Add to Cart"
                     >
@@ -115,7 +68,7 @@ const Products = () => {
                   </div>
                   <p className="font-bold text-lg mt-1 text-slate-900 dark:text-white">₹{data.price}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

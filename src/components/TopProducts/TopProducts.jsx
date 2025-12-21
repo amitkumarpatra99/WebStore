@@ -1,33 +1,10 @@
 import React from "react";
-import Img1 from "../../assets/shirt/shirt.png";
-import Img2 from "../../assets/shirt/shirt2.png";
-import Img3 from "../../assets/shirt/shirt3.png";
 import { FaStar } from "react-icons/fa";
 import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
+import { getAllProducts } from "../../data/products";
 
-const ProductsData = [
-  {
-    id: 6,
-    img: Img1,
-    title: "Casual Wear",
-    description: "Perfect for daily outings. Comfortable, breathable.",
-    price: 80,
-  },
-  {
-    id: 7,
-    img: Img2,
-    title: "Printed Shirt",
-    description: "Stand out with unique prints. High-quality fabric.",
-    price: 95,
-  },
-  {
-    id: 8,
-    img: Img3,
-    title: "Women's Shirt",
-    description: "Elegant designs for the modern woman.",
-    price: 110,
-  },
-];
+const ProductsData = getAllProducts().filter((item) => item.id >= 6);
 
 const TopProducts = ({ handleOrderPopup }) => {
   const { addToCart } = useCart();
@@ -51,10 +28,11 @@ const TopProducts = ({ handleOrderPopup }) => {
         {/* Body section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 md:gap-10 place-items-center">
           {ProductsData.map((data) => (
-            <div
+            <Link
+              to={`/product/${data.id}`}
               key={data.id}
               data-aos="zoom-in"
-              className="rounded-3xl bg-white dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-primary/90 hover:text-white relative shadow-xl hover:shadow-2xl transition-all duration-300 group max-w-[320px] p-4 pt-0 mt-10 w-full"
+              className="rounded-3xl bg-white dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-primary/90 hover:text-white relative shadow-xl hover:shadow-2xl transition-all duration-300 group max-w-[320px] p-4 pt-0 mt-10 w-full block"
             >
               {/* Image Section */}
               <div className="h-[120px] relative z-10">
@@ -83,12 +61,12 @@ const TopProducts = ({ handleOrderPopup }) => {
 
                 <button
                   className="bg-primary group-hover:bg-white group-hover:text-primary text-white py-2 px-6 rounded-full mt-4 hover:scale-105 duration-300 font-semibold shadow-md"
-                  onClick={() => addToCart(data)}
+                  onClick={(e) => { e.preventDefault(); addToCart(data); }}
                 >
                   Add to Cart
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

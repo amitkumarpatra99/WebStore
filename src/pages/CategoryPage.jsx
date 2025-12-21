@@ -3,282 +3,8 @@ import { useParams } from "react-router-dom";
 import { FaStar, FaCartPlus } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 
-// Dummy images (placeholders for now, or reusing existing assets if imported)
-// In a real app, these would be imported or fetched from an API
-const getCategoryData = (category) => {
-    switch (category) {
-        case "mobiles":
-            return [
-                {
-                    id: 101,
-                    img: "https://placehold.co/400x600/png?text=iPhone+15",
-                    title: "iPhone 15 Pro",
-                    description: "Titanium design, A17 Pro chip.",
-                    price: 134900,
-                    rating: 4.8,
-                    color: "Natural Titanium",
-                    aosDelay: "0",
-                },
-                {
-                    id: 102,
-                    img: "https://placehold.co/400x600/png?text=Samsung+S24",
-                    title: "Samsung Galaxy S24",
-                    description: "Galaxy AI is here.",
-                    price: 129999,
-                    rating: 4.7,
-                    color: "Titanium Gray",
-                    aosDelay: "200",
-                },
-                {
-                    id: 103,
-                    img: "https://placehold.co/400x600/png?text=Pixel+8",
-                    title: "Google Pixel 8",
-                    description: "The AI phone by Google.",
-                    price: 75999,
-                    rating: 4.6,
-                    color: "Rose",
-                    aosDelay: "400",
-                },
-                {
-                    id: 104,
-                    img: "https://placehold.co/400x600/png?text=OnePlus+12",
-                    title: "OnePlus 12",
-                    description: "Smooth Beyond Belief.",
-                    price: 64999,
-                    rating: 4.5,
-                    color: "Flowy Emerald",
-                    aosDelay: "600",
-                },
-                {
-                    id: 105,
-                    img: "https://placehold.co/400x600/png?text=Xiaomi+14",
-                    title: "Xiaomi 14",
-                    description: "Leica Summilux lens.",
-                    price: 69999,
-                    rating: 4.6,
-                    color: "Jade Green",
-                    aosDelay: "800",
-                },
-                {
-                    id: 106,
-                    img: "https://placehold.co/400x600/png?text=Realme+12",
-                    title: "Realme 12 Pro+",
-                    description: "Portrait Master.",
-                    price: 29999,
-                    rating: 4.5,
-                    color: "Submarine Blue",
-                    aosDelay: "1000",
-                },
-            ];
-        case "electronics":
-            return [
-                {
-                    id: 201,
-                    img: "https://placehold.co/400x600/png?text=Sony+Headphones",
-                    title: "Sony WH-1000XM5",
-                    description: "Industry-leading noise cancellation.",
-                    price: 26990,
-                    rating: 4.9,
-                    color: "Black",
-                    aosDelay: "0",
-                },
-                {
-                    id: 202,
-                    img: "https://placehold.co/400x600/png?text=MacBook+Air",
-                    title: "MacBook Air M3",
-                    description: "Lean. Mean. M3 machine.",
-                    price: 114900,
-                    rating: 4.9,
-                    color: "Midnight",
-                    aosDelay: "200",
-                },
-                {
-                    id: 203,
-                    img: "https://placehold.co/400x600/png?text=iPad+Air",
-                    title: "iPad Air",
-                    description: "Fresh air.",
-                    price: 59900,
-                    rating: 4.7,
-                    color: "Blue",
-                    aosDelay: "400",
-                },
-                {
-                    id: 204,
-                    img: "https://placehold.co/400x600/png?text=Smart+Watch",
-                    title: "Apple Watch Series 9",
-                    description: "Smarter. Brighter. Mightier.",
-                    price: 41900,
-                    rating: 4.8,
-                    color: "Starlight",
-                    aosDelay: "600",
-                },
-                {
-                    id: 205,
-                    img: "https://placehold.co/400x600/png?text=JBL+Speaker",
-                    title: "JBL Flip 6",
-                    description: "Bold sound for every adventure.",
-                    price: 9999,
-                    rating: 4.7,
-                    color: "Teal",
-                    aosDelay: "800",
-                },
-                {
-                    id: 206,
-                    img: "https://placehold.co/400x600/png?text=Canon+Camera",
-                    title: "Canon EOS R50",
-                    description: "Create content that stands out.",
-                    price: 59990,
-                    rating: 4.8,
-                    color: "Black",
-                    aosDelay: "1000",
-                },
-            ];
-        case "fashion":
-            return [
-                {
-                    id: 301,
-                    img: "https://placehold.co/400x600/png?text=Levis+Jacket",
-                    title: "Levi's Denim Jacket",
-                    description: "Classic trucker jacket.",
-                    price: 3500,
-                    rating: 4.5,
-                    color: "Blue",
-                    aosDelay: "0",
-                },
-                {
-                    id: 302,
-                    img: "https://placehold.co/400x600/png?text=Zara+Dress",
-                    title: "Floral Summer Dress",
-                    description: "Light and breezy for summer.",
-                    price: 2200,
-                    rating: 4.3,
-                    color: "Floral",
-                    aosDelay: "200",
-                },
-                {
-                    id: 303,
-                    img: "https://placehold.co/400x600/png?text=Nike+Sneakers",
-                    title: "Nike Air Max",
-                    description: "Comfort meets style.",
-                    price: 8995,
-                    rating: 4.7,
-                    color: "White/Red",
-                    aosDelay: "400",
-                },
-                {
-                    id: 304,
-                    img: "https://placehold.co/400x600/png?text=RayBan",
-                    title: "Ray-Ban Aviator",
-                    description: "Timeless style.",
-                    price: 6500,
-                    rating: 4.6,
-                    color: "Gold",
-                    aosDelay: "600",
-                },
-                {
-                    id: 305,
-                    img: "https://placehold.co/400x600/png?text=Mens+Jacket",
-                    title: "Men's Bomber Jacket",
-                    description: "Stylish and warm.",
-                    price: 2999,
-                    rating: 4.4,
-                    color: "Olive",
-                    aosDelay: "800",
-                },
-                {
-                    id: 306,
-                    img: "https://placehold.co/400x600/png?text=Casual+Shirt",
-                    title: "Casual Linen Shirt",
-                    description: "Relaxed fit for weekends.",
-                    price: 1599,
-                    rating: 4.2,
-                    color: "Beige",
-                    aosDelay: "1000",
-                },
-            ];
-        case "top-products":
-            return [
-                {
-                    id: 401,
-                    img: "https://placehold.co/400x600/png?text=Best+Shirt",
-                    title: "Premium Cotton Shirt",
-                    description: "Top rated by customers.",
-                    price: 1500,
-                    rating: 5.0,
-                    color: "White",
-                    aosDelay: "0",
-                },
-                {
-                    id: 402,
-                    img: "https://placehold.co/400x600/png?text=Best+Watch",
-                    title: "Luxury Watch",
-                    description: "Elegant and timeless.",
-                    price: 15000,
-                    rating: 4.9,
-                    color: "Gold",
-                    aosDelay: "200",
-                },
-                {
-                    id: 403,
-                    img: "https://placehold.co/400x600/png?text=Best+Shoes",
-                    title: "Running Shoes",
-                    description: "Best for marathon.",
-                    price: 5000,
-                    rating: 4.8,
-                    color: "Blue",
-                    aosDelay: "400",
-                },
-            ];
-        case "best-selling":
-            return [
-                {
-                    id: 501,
-                    img: "https://placehold.co/400x600/png?text=Trending+1",
-                    title: "Wireless Earbuds",
-                    description: "Best selling audio gear.",
-                    price: 2500,
-                    rating: 4.6,
-                    color: "Black",
-                    aosDelay: "0",
-                },
-                {
-                    id: 502,
-                    img: "https://placehold.co/400x600/png?text=Trending+2",
-                    title: "Smart Band",
-                    description: "Track your fitness.",
-                    price: 1800,
-                    rating: 4.5,
-                    color: "Black",
-                    aosDelay: "200",
-                },
-            ];
-        case "top-rated":
-            return [
-                {
-                    id: 601,
-                    img: "https://placehold.co/400x600/png?text=Rated+1",
-                    title: "Gaming Mouse",
-                    description: "High precision.",
-                    price: 3000,
-                    rating: 5.0,
-                    color: "RGB",
-                    aosDelay: "0",
-                },
-                {
-                    id: 602,
-                    img: "https://placehold.co/400x600/png?text=Rated+2",
-                    title: "Mechanical Keyboard",
-                    description: "Clicky and tactile.",
-                    price: 4500,
-                    rating: 4.9,
-                    color: "Black",
-                    aosDelay: "200",
-                },
-            ];
-        default:
-            return [];
-    }
-};
+import { getCategoryData } from "../data/products";
+import { Link } from "react-router-dom";
 
 const CategoryPage = ({ category: propCategory, title }) => {
     const { category: paramCategory } = useParams();
@@ -305,7 +31,8 @@ const CategoryPage = ({ category: propCategory, title }) => {
                 {products.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-8">
                         {products.map((data) => (
-                            <div
+                            <Link
+                                to={`/product/${data.id}`}
                                 data-aos="fade-up"
                                 data-aos-delay={data.aosDelay}
                                 key={data.id}
@@ -322,7 +49,7 @@ const CategoryPage = ({ category: propCategory, title }) => {
                                     {/* Overlay */}
                                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                         <button
-                                            onClick={(e) => { e.stopPropagation(); addToCart(data); }}
+                                            onClick={(e) => { e.preventDefault(); addToCart(data); }}
                                             className="bg-primary text-white p-3 rounded-full hover:scale-110 transition-transform shadow-lg transform translate-y-4 group-hover:translate-y-0 duration-300"
                                             title="Add to Cart"
                                         >
@@ -344,7 +71,7 @@ const CategoryPage = ({ category: propCategory, title }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 ) : (
