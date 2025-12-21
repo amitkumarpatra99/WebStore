@@ -49,6 +49,26 @@ const getCategoryData = (category) => {
                     color: "Flowy Emerald",
                     aosDelay: "600",
                 },
+                {
+                    id: 105,
+                    img: "https://placehold.co/400x600/png?text=Xiaomi+14",
+                    title: "Xiaomi 14",
+                    description: "Leica Summilux lens.",
+                    price: 69999,
+                    rating: 4.6,
+                    color: "Jade Green",
+                    aosDelay: "800",
+                },
+                {
+                    id: 106,
+                    img: "https://placehold.co/400x600/png?text=Realme+12",
+                    title: "Realme 12 Pro+",
+                    description: "Portrait Master.",
+                    price: 29999,
+                    rating: 4.5,
+                    color: "Submarine Blue",
+                    aosDelay: "1000",
+                },
             ];
         case "electronics":
             return [
@@ -92,6 +112,26 @@ const getCategoryData = (category) => {
                     color: "Starlight",
                     aosDelay: "600",
                 },
+                {
+                    id: 205,
+                    img: "https://placehold.co/400x600/png?text=JBL+Speaker",
+                    title: "JBL Flip 6",
+                    description: "Bold sound for every adventure.",
+                    price: 9999,
+                    rating: 4.7,
+                    color: "Teal",
+                    aosDelay: "800",
+                },
+                {
+                    id: 206,
+                    img: "https://placehold.co/400x600/png?text=Canon+Camera",
+                    title: "Canon EOS R50",
+                    description: "Create content that stands out.",
+                    price: 59990,
+                    rating: 4.8,
+                    color: "Black",
+                    aosDelay: "1000",
+                },
             ];
         case "fashion":
             return [
@@ -134,6 +174,26 @@ const getCategoryData = (category) => {
                     rating: 4.6,
                     color: "Gold",
                     aosDelay: "600",
+                },
+                {
+                    id: 305,
+                    img: "https://placehold.co/400x600/png?text=Mens+Jacket",
+                    title: "Men's Bomber Jacket",
+                    description: "Stylish and warm.",
+                    price: 2999,
+                    rating: 4.4,
+                    color: "Olive",
+                    aosDelay: "800",
+                },
+                {
+                    id: 306,
+                    img: "https://placehold.co/400x600/png?text=Casual+Shirt",
+                    title: "Casual Linen Shirt",
+                    description: "Relaxed fit for weekends.",
+                    price: 1599,
+                    rating: 4.2,
+                    color: "Beige",
+                    aosDelay: "1000",
                 },
             ];
         case "top-products":
