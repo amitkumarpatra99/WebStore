@@ -5,6 +5,18 @@ import Img4 from "../assets/women/women4.jpg";
 import Shirt1 from "../assets/shirt/shirt.png";
 import Shirt2 from "../assets/shirt/shirt2.png";
 import Shirt3 from "../assets/shirt/shirt3.png";
+import Iphone15 from "../assets/mobiles/iphone-15-pro.jpg";
+import SamsungS24 from "../assets/mobiles/samsung-s24.png";
+import Pixel8 from "../assets/mobiles/pixel-8.jpg";
+import Oneplus12 from "../assets/mobiles/oneplus-12.jpg";
+import Xiaomi14 from "../assets/mobiles/xiaomi-14.jpg";
+import Realme12 from "../assets/mobiles/realme-12-pro-plus.jpg";
+import SonyHeadphones from "../assets/electronics/sony-headphones.jpg";
+import MacbookAir from "../assets/electronics/macbook-air.jpg";
+import IpadAir from "../assets/electronics/ipad-air.jpg";
+import AppleWatch from "../assets/electronics/apple-watch.jpg";
+import JblFlip6 from "../assets/electronics/jbl-flip-6.png";
+import CanonR50 from "../assets/electronics/canon-r50.png";
 
 const products = [
     // Featured Products (Home Page)
@@ -97,7 +109,7 @@ const products = [
     // Mobiles
     {
         id: 101,
-        img: "https://placehold.co/400x600/png?text=iPhone+15",
+        img: Iphone15,
         title: "iPhone 15 Pro",
         description: "Titanium design, A17 Pro chip.",
         price: 134900,
@@ -108,7 +120,7 @@ const products = [
     },
     {
         id: 102,
-        img: "https://placehold.co/400x600/png?text=Samsung+S24",
+        img: SamsungS24,
         title: "Samsung Galaxy S24",
         description: "Galaxy AI is here.",
         price: 129999,
@@ -119,7 +131,7 @@ const products = [
     },
     {
         id: 103,
-        img: "https://placehold.co/400x600/png?text=Pixel+8",
+        img: Pixel8,
         title: "Google Pixel 8",
         description: "The AI phone by Google.",
         price: 75999,
@@ -130,7 +142,7 @@ const products = [
     },
     {
         id: 104,
-        img: "https://placehold.co/400x600/png?text=OnePlus+12",
+        img: Oneplus12,
         title: "OnePlus 12",
         description: "Smooth Beyond Belief.",
         price: 64999,
@@ -141,7 +153,7 @@ const products = [
     },
     {
         id: 105,
-        img: "https://placehold.co/400x600/png?text=Xiaomi+14",
+        img: Xiaomi14,
         title: "Xiaomi 14",
         description: "Leica Summilux lens.",
         price: 69999,
@@ -152,7 +164,7 @@ const products = [
     },
     {
         id: 106,
-        img: "https://placehold.co/400x600/png?text=Realme+12",
+        img: Realme12,
         title: "Realme 12 Pro+",
         description: "Portrait Master.",
         price: 29999,
@@ -165,7 +177,7 @@ const products = [
     // Electronics
     {
         id: 201,
-        img: "https://placehold.co/400x600/png?text=Sony+Headphones",
+        img: SonyHeadphones,
         title: "Sony WH-1000XM5",
         description: "Industry-leading noise cancellation.",
         price: 26990,
@@ -176,7 +188,7 @@ const products = [
     },
     {
         id: 202,
-        img: "https://placehold.co/400x600/png?text=MacBook+Air",
+        img: MacbookAir,
         title: "MacBook Air M3",
         description: "Lean. Mean. M3 machine.",
         price: 114900,
@@ -187,7 +199,7 @@ const products = [
     },
     {
         id: 203,
-        img: "https://placehold.co/400x600/png?text=iPad+Air",
+        img: IpadAir,
         title: "iPad Air",
         description: "Fresh air.",
         price: 59900,
@@ -198,7 +210,7 @@ const products = [
     },
     {
         id: 204,
-        img: "https://placehold.co/400x600/png?text=Smart+Watch",
+        img: AppleWatch,
         title: "Apple Watch Series 9",
         description: "Smarter. Brighter. Mightier.",
         price: 41900,
@@ -209,7 +221,7 @@ const products = [
     },
     {
         id: 205,
-        img: "https://placehold.co/400x600/png?text=JBL+Speaker",
+        img: JblFlip6,
         title: "JBL Flip 6",
         description: "Bold sound for every adventure.",
         price: 9999,
@@ -220,7 +232,7 @@ const products = [
     },
     {
         id: 206,
-        img: "https://placehold.co/400x600/png?text=Canon+Camera",
+        img: CanonR50,
         title: "Canon EOS R50",
         description: "Create content that stands out.",
         price: 59990,
