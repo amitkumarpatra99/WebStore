@@ -22,7 +22,9 @@ import { OrderProvider } from "./context/OrderContext";
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
 import Wishlist from "./pages/Wishlist";
+import SearchResults from "./pages/SearchResults";
 import { WishlistProvider } from "./context/WishlistContext";
 import { Toaster } from "react-hot-toast";
 
@@ -78,6 +80,9 @@ const App = () => {
                     <Route path="orders" element={<Orders />} />
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<Signup />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="search" element={<SearchResults />} />
+                    <Route path="wishlist" element={<Wishlist />} />
                   </Route>
                 </Routes>
               </div>

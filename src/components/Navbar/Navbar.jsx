@@ -7,7 +7,9 @@ import DarkMode from "./DarkMode";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
-import { FaUser } from "react-icons/fa6";
+import { useAuth } from "../../context/AuthContext";
+import { FaUser, FaHeart } from "react-icons/fa6";
+import { useWishlist } from "../../context/WishlistContext";
 
 const Menu = [
   { id: 1, name: "Home", link: "/" },
@@ -25,9 +27,17 @@ const DropdownLinks = [
 
 const Navbar = ({ handleOrderPopup }) => {
   const { cartItems } = useCart();
+  const { wishlistItems } = useWishlist();
   const { user, logout } = useAuth();
   const [showMenu, setShowMenu] = React.useState(false);
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = React.useState("");
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      navigate(`/search?q=${searchQuery}`);
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -97,10 +107,26 @@ const Navbar = ({ handleOrderPopup }) => {
             <input
               type="text"
               placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
               className="w-[200px] transition-all duration-300 group-hover:w-[300px] rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
             />
-            <IoMdSearch className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-400 group-hover:text-primary transition-colors" />
+            <IoMdSearch className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-400 group-hover:text-primary transition-colors cursor-pointer" onClick={() => searchQuery.trim() && navigate(`/search?q=${searchQuery}`)} />
           </div>
+
+          {/* Wishlist Button */}
+          <Link
+            to="/wishlist"
+            className="relative p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 transition-all duration-300 group"
+          >
+            <FaHeart className="text-xl group-hover:animate-pulse" />
+            {wishlistItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] flex items-center justify-center rounded-full shadow-sm">
+                {wishlistItems.length}
+              </span>
+            )}
+          </Link>
 
           {/* Cart Button */}
           <Link
@@ -134,6 +160,11 @@ const Navbar = ({ handleOrderPopup }) => {
                       <p className="text-xs text-gray-400 truncate">{user.email}</p>
                     </div>
                     <ul>
+                      <li>
+                        <Link to="/profile" className="block px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary transition-colors">
+                          My Profile
+                        </Link>
+                      </li>
                       <li>
                         <Link to="/orders" className="block px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary transition-colors">
                           My Orders

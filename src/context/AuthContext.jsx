@@ -64,11 +64,34 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("webStoreUser");
     };
 
+    const updateUser = (updatedData) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+                const userIndex = registeredUsers.findIndex(u => u.email === user.email);
+
+                if (userIndex !== -1) {
+                    const updatedUser = { ...registeredUsers[userIndex], ...updatedData };
+                    registeredUsers[userIndex] = updatedUser;
+                    localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+
+                    const { password, ...userWithoutPassword } = updatedUser;
+                    setUser(userWithoutPassword);
+                    localStorage.setItem("webStoreUser", JSON.stringify(userWithoutPassword));
+                    resolve(userWithoutPassword);
+                } else {
+                    reject("User not found");
+                }
+            }, 500);
+        });
+    };
+
     const value = {
         user,
         login,
         signup,
         logout,
+        updateUser,
         isAuthenticated: !!user,
     };
 
