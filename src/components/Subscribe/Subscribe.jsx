@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Subscribe = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = () => {
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    // Basic email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Subscribed successfully!");
+      setEmail("");
+    }, 2000);
+  };
+
   return (
     <div
       data-aos="zoom-in"
@@ -23,13 +50,17 @@ const Subscribe = () => {
               data-aos="fade-up"
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-4 pr-32 rounded-full border-none bg-white text-gray-800 focus:outline-none focus:ring-4 focus:ring-white/30 shadow-lg text-base"
             />
             <button
               type="button"
-              className="absolute right-2 top-1.5 bottom-1.5 px-6 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors shadow-md"
+              onClick={handleSubscribe}
+              disabled={loading}
+              className={`absolute right-2 top-1.5 bottom-1.5 px-6 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors shadow-md ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
             >
-              Subscribe
+              {loading ? "Subscribing..." : "Subscribe"}
             </button>
           </div>
         </div>
