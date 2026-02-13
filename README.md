@@ -1,4 +1,4 @@
-# 🛍️ WEB STORE
+# 🛍️ WEB STORE - E Commerce Website 
 
 A stunning, modern, and fully responsive e-commerce frontend built with **React**, **Vite**, and **Tailwind CSS**. This project features a premium glassmorphism design, smooth animations, and a seamless user experience across all devices.
 
